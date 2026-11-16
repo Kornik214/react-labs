@@ -1,0 +1,96 @@
+.profile-card {
+  width: min(100%, 440px);
+  padding: 32px;
+  border: 1px solid #dce3ee;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgb(34 54 86 / 12%);
+}
+
+.profile-card h1 {
+  margin: 0 0 24px;
+  color: #17243a;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.profile-card__details {
+  display: grid;
+  gap: 16px;
+  margin: 0 0 28px;
+}
+
+.profile-card__details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e8edf4;
+}
+
+.profile-card__details dt {
+  color: #5b687c;
+}
+
+.profile-card__details dd {
+  margin: 0;
+  color: #17243a;
+  font-weight: 700;
+}
+
+.profile-card__subtitle {
+  margin: 0 0 12px;
+  color: #17243a;
+  font-size: 1.1rem;
+}
+
+.profile-card__technologies {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 28px;
+  padding-left: 22px;
+  color: #394960;
+}
+
+.profile-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-card__button {
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: #3156d3;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.profile-card__button:hover {
+  background: #2545b3;
+}
+
+.profile-card__button:focus-visible {
+  outline: 3px solid #91a7ff;
+  outline-offset: 3px;
+}
+
+.profile-card__count {
+  margin: 0;
+  color: #5b687c;
+}
+
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 24px;
+  }
+
+  .profile-card__actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
