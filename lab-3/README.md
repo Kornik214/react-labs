@@ -25,10 +25,11 @@ https://denysmatsevych.github.io/web-development-2026/react/labs/lab-3/
 показує цей блок діаграмою; перевірити її до `git push` можна в
 https://mermaid.live/.
 
-```mermaid
 flowchart TD
-  App
-```
+App --> SearchBar
+App --> MenuTable
+MenuTable --> MenuCategory["MenuCategory ×3"]
+MenuCategory --> MenuItemRow["MenuItemRow ×10"]
 
 ## Стан
 
