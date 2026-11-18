@@ -1,21 +1,60 @@
-/**
- * Вкладки — складений компонент (compound component): `Tabs` і його частини
- * `Tabs.List`, `Tabs.Tab` і `Tabs.Panel`. Вміст кожної частини приходить між
- * її тегами як `children`, а яка вкладка обрана, частини дізнаються з
- * контексту, який створює `Tabs`.
- *
- * Використання:
- *   <Tabs defaultValue="brew">
- *     <Tabs.List aria-label="Про каву">
- *       <Tabs.Tab value="brew">Заварювання</Tabs.Tab>
- *       <Tabs.Tab value="reviews">Відгуки</Tabs.Tab>
- *     </Tabs.List>
- *     <Tabs.Panel value="brew">…</Tabs.Panel>
- *     <Tabs.Panel value="reviews">…</Tabs.Panel>
- *   </Tabs>
- *
- * Вимоги — у тестах tests/Tabs.children.test.jsx і tests/Tabs.a11y.test.jsx.
- */
-export default function Tabs() {
-  throw new Error('Not implemented: Tabs')
+import { createContext, use, useState } from 'react'
+
+const TabsContext = createContext(null)
+
+function useTabsContext() {
+  const context = use(TabsContext)
+  if (!context) {
+    throw new Error('Tabs.Tab and Tabs.Panel must be used inside <Tabs>')
+  }
+  return context
 }
+
+function TabsList({ children, ...props }) {
+  return (
+    <div className="tab-list" {...props}>
+      {children}
+    </div>
+  )
+}
+
+function TabsTab({ value, children, ...props }) {
+  const { activeTab, setActiveTab } = useTabsContext()
+  const isSelected = activeTab === value
+
+  return (
+    <button
+      type="button"
+      className={isSelected ? 'active' : undefined}
+      onClick={() => setActiveTab(value)}
+      {...props}
+    >
+      {children}
+    </button>
+  )
+}
+
+function TabsPanel({ value, children, ...props }) {
+  const { activeTab } = useTabsContext()
+  const isSelected = activeTab === value
+
+  return (
+    <div hidden={!isSelected} {...props}>
+      {children}
+    </div>
+  )
+}
+
+export default function Tabs({ defaultValue, children }) {
+  const [activeTab, setActiveTab] = useState(defaultValue)
+
+  return (
+    <TabsContext value={{ activeTab, setActiveTab }}>
+      <div className="tabs">{children}</div>
+    </TabsContext>
+  )
+}
+
+Tabs.List = TabsList
+Tabs.Tab = TabsTab
+Tabs.Panel = TabsPanel
