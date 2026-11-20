@@ -107,11 +107,12 @@ export function queueReducer(state, action) {
     }
 
     case 'order_cancelled': {
-      const { [action.orderId]: _removed, ...restById } = state.orders.byId
+      const nextById = { ...state.orders.byId }
+      delete nextById[action.orderId]
       return {
         ...state,
         orders: {
-          byId: restById,
+          byId: nextById,
           ids: state.orders.ids.filter((id) => id !== action.orderId),
         },
       }
